@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace OurLinkedList
@@ -20,13 +21,32 @@ namespace OurLinkedList
     
     public class MyLinkedList : MonoBehaviour
     {
-        void Start()
+        [ContextMenu("Test Linked List")]
+        void Test()
         {
             Node Andrew = new Node("Andrew", 300);
             Node Steve = new Node("Steve", 56);
             Node Tom = new Node("Tom", 40);
+            Node Roger = new Node("Roger", 1);
+            Node RogerRoger = new Node("RogerRoger", 2);
+            Node Tim = new Node("Tim", 22); 
+            Node Tam = new Node("Tam", 22);
 
             LinkedList linkedList = new LinkedList(Andrew);
+            linkedList.InsertNext(Steve);
+            linkedList.InsertNext(Tom);
+            linkedList.ReturnToHeader();
+            linkedList.DeleteNext();
+            linkedList.InsertNext(Roger);
+            linkedList.InsertNext(RogerRoger);
+            linkedList.InsertNext(Tim);
+            linkedList.InsertNext(Tam);
+            linkedList.ReturnToHeader();
+            linkedList.Next();
+            linkedList.Next();
+            linkedList.DeleteNext();
+
+            linkedList.PrintAll();
         }
     }
 
@@ -57,8 +77,34 @@ namespace OurLinkedList
             current = newNode; // Optional
         }
 
+        public bool Next()
+        {
+            if (current.next != null)
+            {
+                current = current.next;
+                return true;
+            }
+
+            return false;
+        }
+
+        public bool DeleteNext()
+        {
+            if (current.next == null) return false;
+
+            current.next = current.next.next;
+
+            return true;
+        }
+
+        public void ReturnToHeader()
+        {
+            current = header;
+        }
+
         public void PrintCurrent() => Debug.Log(current.name + " aged " + current.age);
         public void Print(Node node) => Debug.Log(node.name + " aged " + node.age);
+
 
         public void PrintAll()
         {
