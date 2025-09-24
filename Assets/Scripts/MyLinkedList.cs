@@ -49,8 +49,26 @@ namespace OurLinkedList
                 current.next = newNode;
                 newNode.next = null;
             }
-
+            else
+            {
+                newNode.next = current.next;
+                current.next = newNode;
+            }
             current = newNode; // Optional
+        }
+
+        public void PrintCurrent() => Debug.Log(current.name + " aged " + current.age);
+        public void Print(Node node) => Debug.Log(node.name + " aged " + node.age);
+
+        public void PrintAll()
+        {
+            if (header == null) return;
+            Node currentPrint = header;
+            do
+            {
+                Print(currentPrint);
+                currentPrint = currentPrint.next;
+            } while (currentPrint != null);
         }
     }
 }
