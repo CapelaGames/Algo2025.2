@@ -55,6 +55,33 @@ namespace OurLinkedList
             linkedList.Next();
             linkedList.Prev();
             linkedList.PrintCurrent();
+            
+            linkedList.PrintAll();
+            linkedList.DeleteCurr();
+            linkedList.PrintAll();
+            linkedList.DeleteCurr();
+            linkedList.PrintAll();
+            linkedList.DeleteCurr();
+            linkedList.PrintAll();
+            linkedList.DeleteCurr();
+            linkedList.PrintAll();
+            linkedList.DeleteCurr();
+            linkedList.PrintAll();
+            linkedList.DeleteCurr();
+            linkedList.PrintAll();
+            linkedList.DeleteCurr();
+            linkedList.PrintAll();
+            
+            Debug.Log("------------------------");
+            linkedList.InsertNext(Roger);
+            linkedList.PrintAll();
+            Debug.Log("------------------------");
+            linkedList.DeleteCurr();
+            linkedList.PrintAll();
+            linkedList.InsertPrev(Roger);
+            linkedList.InsertNext(Steve);
+            linkedList.InsertPrev(Tom);
+            linkedList.PrintAll();
         }
     }
 
@@ -75,7 +102,15 @@ namespace OurLinkedList
 
         public void InsertNext(Node newNode)
         {
-            if (current.next == null)
+            if (current == null)
+            {
+                header = newNode;
+                tail = newNode;
+                newNode.next = null;
+                newNode.prev = null;
+                // current = newNode;
+            }
+            else if (current.next == null)
             {
                 current.next = newNode;
                 newNode.next = null;
@@ -90,12 +125,20 @@ namespace OurLinkedList
                 newNode.next.prev = newNode;
                 newNode.prev = current;
             }
-            current = newNode; // Optional
+            current = newNode;
         }
 
         public void InsertPrev(Node newNode)
         {
-            if (current.prev == null)
+            if (current == null)
+            {
+                header = newNode;
+                tail = newNode;
+                newNode.next = null;
+                newNode.prev = null;
+                // current = newNode;
+            }
+            else if (current.prev == null)
             {
                 header = newNode;
                 current.prev = newNode;
@@ -114,6 +157,7 @@ namespace OurLinkedList
 
         public bool Next()
         {
+            if (current == null) return false;
             if (current.next != null)
             {
                 current = current.next;
@@ -124,12 +168,12 @@ namespace OurLinkedList
         }
         public bool Prev()
         {
+            if (current == null) return false;
             if (current.prev != null)
             {
                 current = current.prev;
                 return true;
             }
-
             return false;
         }
         
