@@ -36,6 +36,10 @@ namespace MyBinaryTree
             Insert(2, root);
 
             PrintInOrder(root);
+
+            Delete(20, root);
+
+            PrintInOrder(root);
         }
 
         public void Insert(int value, Node current)
@@ -92,7 +96,7 @@ namespace MyBinaryTree
         }
 
 
-        public Node GetSucessor(Node current)
+        public Node GetSuccessor(Node current)
         {
             current = current.right;
 
@@ -108,10 +112,35 @@ namespace MyBinaryTree
         {
             if(current == null) return null;
 
-            // DELETE HERE
+            // searching for the correct value
+            if (value < current.value)
+            {
+                current.left = Delete(value, current.left);
+            }
+            // searching for the correct value
+            else if (value > current.value)
+            {
+                 current.right = Delete(value, current.right);
+            }
+            else // if found the value to delete
+            {
+                if(current.left == null)
+                {
+                    return current.right;
+                }
 
+                if(current.right == null)
+                {
+                    return current.left;
+                }
+
+                Node successor = GetSuccessor(current);
+                current.value = successor.value;
+                current.right = Delete(successor.value, current.right);
+            }
             return current;
         }
+
     }
 
 }
