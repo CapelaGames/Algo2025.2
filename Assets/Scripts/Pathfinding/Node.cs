@@ -21,6 +21,17 @@ namespace MyPathfinding
             }
         }
 
+        public float Heuristic { get; set; }
+        public float heuristicPathWeight
+        {
+            get => Heuristic + pathWeight ;
+        }
+        public float SetHeuristic(Vector3 goal)
+        {
+            Heuristic = Vector3.Distance(transform.position, goal);
+            return Heuristic;
+        }
+
         private Node previousNode;
         public Node  PreviousNode { get => previousNode; set => previousNode = value; }
 
