@@ -16,7 +16,7 @@ namespace MyPathfinding
             while (unexplored.Count > 0)
             {
                 //Sort unexplored list based on path weight
-                unexplored.Sort( (a,b) => a.PathWeight.CompareTo(b.PathWeight) );
+                unexplored.Sort( (a,b) => a.heuristicPathWeight.CompareTo(b.heuristicPathWeight) );
                 Node current = unexplored[0];
                 unexplored.RemoveAt(0);
 
@@ -24,6 +24,8 @@ namespace MyPathfinding
                 {
                     // Ensure that we havn't explored the neighbour
                     if (!unexplored.Contains(neighbourNode)) continue;
+
+                    neighbourNode.SetHeuristic(eNode.transform.position);
 
                     float neighbourWeight = Vector3.Distance(current.transform.position,
                         neighbourNode.transform.position);

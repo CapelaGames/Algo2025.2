@@ -14,10 +14,8 @@ namespace MyPathfinding
 
         public void DebugPath(List<Node> path)
         {
-            Debug.Log(" debug "+ path.Count);
             for (int i = 0; i < path.Count - 1; i++)
             {
-                Debug.Log("TESTTT");
                 Debug.DrawLine(path[i].transform.position + Vector3.up * 0.01f,
                                 path[i + 1].transform.position + Vector3.up * 0.01f,
                                 Color.red, 10f);
@@ -35,7 +33,6 @@ namespace MyPathfinding
                     results.Insert(0,current);
                     current = current.PreviousNode;
                 } while (current != null);
-                Debug.Log(results.Count);
                 return results;
             }
             return null;
