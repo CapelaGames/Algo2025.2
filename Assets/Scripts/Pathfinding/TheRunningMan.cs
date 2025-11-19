@@ -28,6 +28,7 @@ public class TheRunningMan : MonoBehaviour
         List<Node> path = pathFinder.FindShortestPath
                                         (nodes[startNode],
                                         nodes[goalNode]);
+
         timer.Stop();
         pathFinder.DebugPath(path);
         Debug.Log("Pathfinder 1 = " + timer.ElapsedMilliseconds);
